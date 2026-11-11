@@ -1,6 +1,7 @@
 {
   "name": "unisoc-api",
   "version": "1.0.0",
+  "packageManager": "pnpm@12.6.0",
   "private": true,
   "type": "module",
   "scripts": {
