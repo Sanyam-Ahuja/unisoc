@@ -1,6 +1,11 @@
 {
-  "installCommand": "cd frontend && pnpm install --frozen-lockfile",
-  "buildCommand": "cd frontend && pnpm build",
+  "installCommand": "cd frontend && npx --yes pnpm@12.18.0 install --frozen-lockfile",
+  "buildCommand": "cd frontend && npx --yes pnpm@12.18.0 build",
   "outputDirectory": "frontend/dist",
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
 }
