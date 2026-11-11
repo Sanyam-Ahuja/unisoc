@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: campus_app
+      POSTGRES_USER: campus
+      POSTGRES_PASSWORD: campus_local
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://campus:campus_local@db:5432/campus_app
+      FRONTEND_ORIGINS: http://localhost:5173
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://localhost:8000
+    depends_on:
+      - api
+volumes:
+  pgdata:
